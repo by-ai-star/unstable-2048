@@ -155,6 +155,42 @@
     game.bus.on('historyChanged', render);
   }
 
+  // V15 菜单底部离线缓存状态指示：让玩家在断网前确认缓存已就绪
+  function bindOfflineStatus() {
+    const el = document.getElementById('offline-status');
+    if (!el || !('serviceWorker' in navigator)) return;
+
+    function render(status) {
+      if (status.count >= status.total) {
+        el.textContent = '离线缓存：就绪（' + status.count + '/' + status.total +
+          '），可断网游玩';
+      } else if (status.count > 0) {
+        el.textContent = '离线缓存：不完整（' + status.count + '/' + status.total +
+          '），请保持联网刷新页面几次';
+      } else {
+        el.textContent = '离线缓存：未就绪，请保持联网多停留几秒后刷新';
+      }
+    }
+
+    function query() {
+      navigator.serviceWorker.ready.then(reg => {
+        const worker = reg.active || reg.waiting || reg.installing;
+        if (worker) worker.postMessage('GET_CACHE_STATUS');
+      }).catch(() => {
+        el.textContent = '离线缓存：不可用（当前环境不支持）';
+      });
+    }
+
+    navigator.serviceWorker.addEventListener('message', event => {
+      if (event.data && event.data.type === 'CACHE_STATUS') {
+        render(event.data);
+      }
+    });
+    // 新 SW 接管页面后重新查询（版本升级完成）
+    navigator.serviceWorker.addEventListener('controllerchange', query);
+    query();
+  }
+
   function boot() {
     const canvas = document.getElementById('game-canvas');
     const game = new U.Game();
@@ -165,6 +201,7 @@
     bindTileGrowthSettings(game);
     bindMergeCapSetting(game);
     bindHistoryPanel(game);
+    bindOfflineStatus();
 
     // 竖屏适配：画布等比缩放至视口
     const CFG_WORLD = U.CFG.world;
