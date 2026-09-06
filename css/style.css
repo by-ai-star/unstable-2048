@@ -91,6 +91,12 @@ html, body {
   padding: 24px;
 }
 
+/* 主菜单背景完全不透明：暂停后返回主菜单不再透出游戏画面 */
+#menu {
+  background: #37312b;
+  overflow-y: auto;
+}
+
 #menu h1 {
   font-size: 34px;
   letter-spacing: 2px;
