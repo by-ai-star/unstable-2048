@@ -1,7 +1,7 @@
 // Service Worker：预缓存全部游戏文件，安装后完全离线可玩。
 // ⚠️ 每次更新游戏代码后必须递增 CACHE_NAME 版本号（v1 → v2 → ...），
 // 否则已安装的 PWA 可能继续读取旧缓存。
-const CACHE_NAME = 'unstable-2048-v3';
+const CACHE_NAME = 'unstable-2048-v4';
 
 // 全部使用相对路径（./），适配 GitHub Pages 的 /unstable-2048/ 子路径部署。
 // 新增游戏文件时必须同步加入此清单并递增版本号。
