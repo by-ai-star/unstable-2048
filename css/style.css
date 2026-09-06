@@ -1,0 +1,348 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #2b2620;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#game-canvas {
+  display: block;
+  background: #faf8ef;
+  touch-action: none;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- HUD ---------- */
+#hud {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(43, 38, 32, 0.85);
+  border-radius: 0 0 12px 12px;
+  color: #f9f6f2;
+}
+
+#hud .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 52px;
+}
+
+#hud .label {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+#hud .stat span:last-child {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#btn-pause {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: #8f7a66;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ---------- 覆盖层 ---------- */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: rgba(43, 38, 32, 0.92);
+  color: #f9f6f2;
+  text-align: center;
+  z-index: 10;
+  padding: 24px;
+}
+
+#menu h1 {
+  font-size: 34px;
+  letter-spacing: 2px;
+}
+
+#menu h1 .big { color: #edc22e; }
+
+.subtitle { opacity: 0.75; font-size: 14px; }
+
+.overlay h2 { font-size: 26px; }
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 220px;
+}
+
+.buttons button {
+  padding: 14px 0;
+  font-size: 17px;
+  border: none;
+  border-radius: 12px;
+  background: #8f7a66;
+  color: #fff;
+  cursor: pointer;
+}
+
+.buttons button.primary {
+  background: #edc22e;
+  color: #5a4a1e;
+  font-weight: bold;
+}
+
+.help {
+  font-size: 13px;
+  line-height: 1.9;
+  opacity: 0.85;
+}
+
+.help .best-line { margin-top: 6px; color: #edc22e; }
+
+/* ---------- V14 数字变大模式开关 ---------- */
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 220px;
+  padding: 12px 14px;
+  border: 1px solid rgba(249, 246, 242, 0.18);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #f9f6f2;
+  cursor: pointer;
+}
+
+/* 滑动开关外观 */
+.setting-row input[role="switch"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 44px;
+  height: 24px;
+  margin: 0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.25);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.setting-row input[role="switch"]::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  transition: left 0.15s;
+}
+
+.setting-row input[role="switch"]:checked {
+  background: #3d6637;
+}
+
+.setting-row input[role="switch"]:checked::after {
+  left: 22px;
+}
+
+.settings-hint {
+  margin: 0;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* V14.2 合成上限下拉框 */
+.setting-row select {
+  width: 110px;
+  padding: 4px 6px;
+  border: 1px solid rgba(249, 246, 242, 0.3);
+  border-radius: 6px;
+  background: #4a4038;
+  color: #f9f6f2;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ---------- V14.2 历史战绩面板 ---------- */
+.history-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.history-tabs button {
+  padding: 8px 18px;
+  border: 1px solid rgba(249, 246, 242, 0.3);
+  border-radius: 10px;
+  background: transparent;
+  color: #f9f6f2;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.history-tabs button.active {
+  background: #edc22e;
+  border-color: #edc22e;
+  color: #5a4a1e;
+  font-weight: bold;
+}
+
+.history-list {
+  width: 260px;
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-item {
+  padding: 8px 12px;
+  border: 1px solid rgba(249, 246, 242, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f9f6f2;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.history-item .h-time {
+  font-size: 11px;
+  opacity: 0.65;
+}
+
+.history-item .h-main {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.history-item .h-cap {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.history-empty {
+  margin: 0;
+  color: #f9f6f2;
+  opacity: 0.6;
+  font-size: 13px;
+}
+
+.result {
+  display: flex;
+  gap: 26px;
+}
+
+.result .stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.result .label { font-size: 12px; opacity: 0.7; }
+.result .stat span:last-child { font-size: 22px; font-weight: bold; color: #edc22e; }
+
+/* ---------- 挂机倍速分段按钮 ---------- */
+/* 简单分段控件，不加渐变、发光或动画 */
+#idle-speed-control {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+#idle-speed-control.hidden {
+  display: none;
+}
+
+.idle-speed-options {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid rgba(70, 60, 50, 0.3);
+  border-radius: 6px;
+  background: rgba(245, 238, 228, 0.82);
+}
+
+.idle-speed-options button {
+  width: 34px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #55493d;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+  cursor: pointer;
+}
+
+.idle-speed-options button:hover {
+  background: rgba(120, 105, 90, 0.14);
+}
+
+.idle-speed-options button.active {
+  background: #6f6255;
+  color: #fffaf2;
+}
+
+.idle-speed-options button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+
+@media (max-width: 520px) {
+  .idle-speed-options button {
+    width: 30px;
+    height: 26px;
+    font-size: 11px;
+    line-height: 26px;
+  }
+}
