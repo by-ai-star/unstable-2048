@@ -91,261 +91,176 @@ html, body {
   padding: 24px;
 }
 
-/* 主菜单：完全不透明，返回主菜单后不再透出游戏画面 */
-#menu {
-  display: block;
-  overflow-y: auto;
-  background: #37312b;
-  padding: 34px 16px 28px;
-}
-
 #menu h1 {
-  margin: 0;
-  font-size: clamp(30px, 9vw, 42px);
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: 34px;
   letter-spacing: 2px;
 }
 
 #menu h1 .big { color: #edc22e; }
 
-.subtitle {
-  margin: 12px 0 0;
-  color: rgba(255, 250, 242, 0.76);
-  font-size: 14px;
-  line-height: 1.5;
-}
+.subtitle { opacity: 0.75; font-size: 14px; }
 
 .overlay h2 { font-size: 26px; }
 
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: min(100%, 360px);
-  margin-left: auto;
-  margin-right: auto;
+  gap: 12px;
+  width: 220px;
 }
 
 .buttons button {
-  min-height: 50px;
-  padding: 12px 0;
-  font-size: 16px;
-  font-weight: 700;
+  padding: 14px 0;
+  font-size: 17px;
   border: none;
-  border-radius: 9px;
-  background: #988470;
-  color: #fffaf2;
+  border-radius: 12px;
+  background: #8f7a66;
+  color: #fff;
   cursor: pointer;
-  transition: filter 120ms ease;
 }
 
-.buttons button:hover { filter: brightness(1.05); }
-
-.buttons button:active { transform: translateY(1px); }
-
 .buttons button.primary {
-  background: #f3c223;
-  color: #40351f;
+  background: #edc22e;
+  color: #5a4a1e;
+  font-weight: bold;
 }
 
 .help {
-  width: min(100%, 360px);
-  margin: 20px auto 0;
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 6px 18px;
-  justify-content: center;
   font-size: 13px;
-  line-height: 1.6;
-  color: rgba(255, 250, 242, 0.85);
-  text-align: left;
+  line-height: 1.9;
+  opacity: 0.85;
 }
 
-.help .best-line,
-.help .offline-status {
-  grid-column: 1 / -1;
-  margin: 8px 0 0;
-  text-align: center;
-}
+.help .best-line { margin-top: 6px; color: #edc22e; }
 
-.help .best-line { color: #edc22e; }
-
-/* ---------- 局前设置（V15：浅色实色面板，不再透出游戏背景） ---------- */
+/* ---------- V14 数字变大模式开关 ---------- */
 .settings {
-  width: min(100%, 360px);
-  margin: 22px auto 0;
-  padding: 16px 18px 14px;
-  border: 1px solid rgba(60, 51, 43, 0.16);
-  border-radius: 10px;
-  background: #fffdf8;
-  box-shadow: 0 8px 24px rgba(45, 35, 25, 0.08);
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 220px;
+  padding: 12px 14px;
+  border: 1px solid rgba(249, 246, 242, 0.18);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .setting-row {
-  min-height: 42px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
-  gap: 16px;
-  color: #3f3932;
+  justify-content: space-between;
   font-size: 14px;
-  line-height: 1.4;
+  color: #f9f6f2;
   cursor: pointer;
-}
-
-.setting-row + .setting-row {
-  margin-top: 8px;
 }
 
 /* 滑动开关外观 */
 .setting-row input[role="switch"] {
   appearance: none;
   -webkit-appearance: none;
-  width: 46px;
-  height: 26px;
+  width: 44px;
+  height: 24px;
   margin: 0;
-  border: 0;
-  border-radius: 999px;
-  background: #b9b2a9;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.25);
   position: relative;
   cursor: pointer;
-  transition: background-color 160ms ease;
+  transition: background 0.15s;
   flex-shrink: 0;
-  justify-self: end;
 }
 
 .setting-row input[role="switch"]::after {
   content: '';
   position: absolute;
-  top: 3px;
-  left: 3px;
+  top: 2px;
+  left: 2px;
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: left 160ms ease;
+  transition: left 0.15s;
 }
 
 .setting-row input[role="switch"]:checked {
-  background: #4b934f;
+  background: #3d6637;
 }
 
 .setting-row input[role="switch"]:checked::after {
-  left: 23px;
-}
-
-/* 合成上限下拉框 */
-.setting-row select {
-  min-width: 112px;
-  height: 36px;
-  padding: 0 8px;
-  border: 1px solid rgba(63, 57, 50, 0.28);
-  border-radius: 6px;
-  background: #f7f2e9;
-  color: #3f3932;
-  font-size: 13px;
-  cursor: pointer;
-  justify-self: end;
+  left: 22px;
 }
 
 .settings-hint {
-  margin: 12px 0 0;
-  color: #756b60;
-  font-size: 12px;
-  line-height: 1.5;
-  text-align: center;
+  margin: 0;
+  font-size: 11px;
+  opacity: 0.6;
 }
 
-button:focus-visible,
-.setting-row input:focus-visible,
-.setting-row select:focus-visible {
-  outline: 3px solid rgba(243, 194, 35, 0.55);
-  outline-offset: 2px;
+/* V14.2 合成上限下拉框 */
+.setting-row select {
+  width: 110px;
+  padding: 4px 6px;
+  border: 1px solid rgba(249, 246, 242, 0.3);
+  border-radius: 6px;
+  background: #4a4038;
+  color: #f9f6f2;
+  font-size: 13px;
+  cursor: pointer;
 }
 
-/* ---------- 弹层面板（V15：实色面板，按钮不再悬浮在半透明层上） ---------- */
-.panel {
-  width: min(100%, 340px);
-  padding: 24px 20px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
-  background: #494139;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.32);
-  color: #fffaf2;
-}
-
-.panel h2 {
-  margin: 0 0 16px;
-  font-size: 26px;
-  line-height: 1.2;
-}
-
-/* ---------- V14.2 历史战绩面板（浅色实色面板） ---------- */
-.history-panel {
-  width: min(100%, 420px);
-  max-height: min(720px, calc(100vh - 40px));
-  overflow-y: auto;
-  padding: 20px;
-  border-radius: 10px;
-  background: #fffdf8;
-  color: #3f3932;
-  text-align: left;
-}
-
-.history-panel h2 {
-  margin: 0 0 14px;
-  font-size: 24px;
-  text-align: center;
-}
-
+/* ---------- V14.2 历史战绩面板 ---------- */
 .history-tabs {
   display: flex;
   gap: 8px;
-  margin-bottom: 12px;
 }
 
 .history-tabs button {
-  flex: 1;
   padding: 8px 18px;
-  border: 1px solid rgba(63, 57, 50, 0.28);
+  border: 1px solid rgba(249, 246, 242, 0.3);
   border-radius: 10px;
   background: transparent;
-  color: #3f3932;
+  color: #f9f6f2;
   font-size: 14px;
   cursor: pointer;
 }
 
 .history-tabs button.active {
-  background: #f3c223;
-  border-color: #f3c223;
-  color: #40351f;
+  background: #edc22e;
+  border-color: #edc22e;
+  color: #5a4a1e;
   font-weight: bold;
 }
 
 .history-list {
+  width: 260px;
+  max-height: 300px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 320px;
-  overflow-y: auto;
 }
 
 .history-item {
   padding: 8px 12px;
-  border: 1px solid rgba(63, 57, 50, 0.14);
+  border: 1px solid rgba(249, 246, 242, 0.18);
   border-radius: 10px;
-  background: rgba(63, 57, 50, 0.05);
-  color: #3f3932;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f9f6f2;
+  text-align: left;
   font-size: 13px;
   line-height: 1.5;
 }
 
 .history-item .h-time {
   font-size: 11px;
-  color: #756b60;
+  opacity: 0.65;
+}
+
+/* V15 离线缓存状态指示 */
+.offline-status {
+  margin-top: 6px;
+  font-size: 11px;
+  opacity: 0.75;
+  color: #f9f6f2;
 }
 
 .history-item .h-main {
@@ -357,21 +272,14 @@ button:focus-visible,
 
 .history-item .h-cap {
   font-size: 11px;
-  color: #756b60;
+  opacity: 0.7;
 }
 
 .history-empty {
   margin: 0;
-  color: #756b60;
-  font-size: 13px;
-}
-
-/* V15 离线缓存状态指示（主菜单深色背景下使用） */
-.offline-status {
-  margin-top: 6px;
-  font-size: 11px;
-  opacity: 0.75;
   color: #f9f6f2;
+  opacity: 0.6;
+  font-size: 13px;
 }
 
 .result {

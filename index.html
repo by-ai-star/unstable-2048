@@ -48,21 +48,21 @@
 
     <!-- 主菜单 -->
     <div id="menu" class="overlay">
-      <h1>俄罗斯方块<span class="big">X2048</span></h1>
-      <p class="subtitle">接住方块，让相同数字合在一起</p>
+      <h1>不稳定的<span class="big">2048</span></h1>
+      <p class="subtitle">俄罗斯方块 × 物理 × 2048</p>
 
       <!-- V14/V14.2 局前设置 -->
       <div class="settings">
         <label class="setting-row" for="classic-growth-toggle">
-          <span>经典模式：大数字变大</span>
-          <input id="classic-growth-toggle" type="checkbox" role="switch" aria-label="经典模式：大数字变大">
+          <span>经典模式数字变大</span>
+          <input id="classic-growth-toggle" type="checkbox" role="switch">
         </label>
         <label class="setting-row" for="idle-growth-toggle">
-          <span>挂机模式：大数字变大</span>
-          <input id="idle-growth-toggle" type="checkbox" role="switch" aria-label="挂机模式：大数字变大">
+          <span>挂机模式数字变大</span>
+          <input id="idle-growth-toggle" type="checkbox" role="switch">
         </label>
         <label class="setting-row" for="merge-cap-select">
-          <span>合成上限</span>
+          <span>最大合成数字</span>
           <select id="merge-cap-select">
             <option value="4096">4096</option>
             <option value="8192">8192</option>
@@ -74,21 +74,20 @@
             <option value="infinite">无限</option>
           </select>
         </label>
-        <p class="settings-hint">这些设置会在下一局开始时生效</p>
+        <p class="settings-hint">数字变大设置将在下一局生效</p>
       </div>
 
       <div class="buttons">
-        <button id="btn-classic" class="primary">开始经典模式</button>
-        <button id="btn-idle">开始挂机模式</button>
-        <button id="btn-history">查看历史战绩</button>
+        <button id="btn-classic" class="primary">经典模式</button>
+        <button id="btn-idle">挂机模式</button>
+        <button id="btn-history">历史战绩</button>
       </div>
 
       <div class="help">
-        <p>点击方块：旋转</p>
-        <p>左右拖动：移动</p>
-        <p>按住向下：加速下落</p>
-        <p>相同数字碰撞：合并</p>
-        <p>方块堆到红线：本局结束</p>
+        <p>👆 点击屏幕 → 旋转方块</p>
+        <p>✋ 按住拖动 → 左右移动</p>
+        <p>🔁 相同数字碰到一起就合并</p>
+        <p>⚠️ 堆过红色警戒线就输了</p>
         <p class="best-line">最高分：<span id="menu-best">0</span></p>
         <p class="offline-status" id="offline-status">离线缓存：检测中…</p>
       </div>
@@ -96,44 +95,38 @@
 
     <!-- 暂停 -->
     <div id="pause-overlay" class="overlay hidden">
-      <div class="panel">
-        <h2>已暂停</h2>
-        <div class="buttons">
-          <button id="btn-resume" class="primary">继续游戏</button>
-          <button id="btn-quit-pause">返回主菜单</button>
-        </div>
+      <h2>已暂停</h2>
+      <div class="buttons">
+        <button id="btn-resume" class="primary">继续</button>
+        <button id="btn-quit-pause">回主菜单</button>
       </div>
     </div>
 
     <!-- 结算 -->
     <div id="gameover" class="overlay hidden">
-      <div class="panel">
-        <h2>游戏结束</h2>
-        <div class="result">
-          <div class="stat"><span class="label">本局分数</span><span id="over-score">0</span></div>
-          <div class="stat"><span class="label">最大数字</span><span id="over-max-tile">2</span></div>
-          <div class="stat"><span class="label">最高分</span><span id="over-best">0</span></div>
-        </div>
-        <div class="buttons">
-          <button id="btn-restart" class="primary">再来一局</button>
-          <button id="btn-to-menu">回主菜单</button>
-        </div>
+      <h2>游戏结束</h2>
+      <div class="result">
+        <div class="stat"><span class="label">本局分数</span><span id="over-score">0</span></div>
+        <div class="stat"><span class="label">最大数字</span><span id="over-max-tile">2</span></div>
+        <div class="stat"><span class="label">最高分</span><span id="over-best">0</span></div>
+      </div>
+      <div class="buttons">
+        <button id="btn-restart" class="primary">再来一局</button>
+        <button id="btn-to-menu">回主菜单</button>
       </div>
     </div>
 
     <!-- V14.2 历史战绩 -->
     <div id="history-overlay" class="overlay hidden">
-      <div class="panel history-panel">
-        <h2>历史战绩</h2>
-        <div class="history-tabs">
-          <button id="hist-tab-classic" class="active">经典模式</button>
-          <button id="hist-tab-idle">挂机模式</button>
-        </div>
-        <div id="history-list" class="history-list"></div>
-        <div class="buttons">
-          <button id="btn-history-clear">清空当前记录</button>
-          <button id="btn-history-close" class="primary">返 回</button>
-        </div>
+      <h2>历史战绩</h2>
+      <div class="history-tabs">
+        <button id="hist-tab-classic" class="active">经典模式</button>
+        <button id="hist-tab-idle">挂机模式</button>
+      </div>
+      <div id="history-list" class="history-list"></div>
+      <div class="buttons">
+        <button id="btn-history-clear">清空当前记录</button>
+        <button id="btn-history-close" class="primary">返 回</button>
       </div>
     </div>
   </div>
