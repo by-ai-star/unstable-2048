@@ -203,8 +203,8 @@ html, body {
 
 /* V14.2 合成上限下拉框 */
 .setting-row select {
-  width: 110px;
-  padding: 4px 6px;
+  width: 88px;
+  padding: 4px 4px 4px 8px;
   border: 1px solid rgba(249, 246, 242, 0.3);
   border-radius: 6px;
   background: #4a4038;
