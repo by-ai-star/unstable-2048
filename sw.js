@@ -1,7 +1,7 @@
 // Service Worker：预缓存全部游戏文件，安装后完全离线可玩。
 // ⚠️ 每次更新游戏代码后必须递增 CACHE_NAME 版本号（v1 → v2 → ...），
 // 否则已安装的 PWA 可能继续读取旧缓存。
-const CACHE_NAME = 'unstable-2048-v6';
+const CACHE_NAME = 'unstable-2048-v7';
 
 // 全部使用相对路径（./），适配 GitHub Pages 的 /unstable-2048/ 子路径部署。
 // 新增游戏文件时必须同步加入此清单并递增版本号。
@@ -50,7 +50,9 @@ async function cacheAllWithRetry(cache) {
   for (let round = 0; round < 3 && pending.length; round++) {
     const results = await Promise.all(pending.map(async url => {
       try {
-        const resp = await fetch(url);
+        // cache: 'reload' 绕过 HTTP 缓存，确保缓存的是源站最新文件
+        // （GitHub Pages 的 max-age=600 会把旧文件留在 HTTP 缓存里）
+        const resp = await fetch(url, { cache: 'reload' });
         if (!resp.ok) return false;
         await cache.put(url, resp);
         return true;
@@ -100,7 +102,7 @@ self.addEventListener('fetch', event => {
     caches.match(request, { ignoreSearch: true }).then(cached => {
       if (cached) return cached;
 
-      return fetch(request).then(response => {
+      return fetch(request, { cache: 'reload' }).then(response => {
         // 同源成功响应写入缓存，便于后续离线访问
         if (response.ok && new URL(request.url).origin === self.location.origin) {
           const clone = response.clone();
